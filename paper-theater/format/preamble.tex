@@ -1,11 +1,13 @@
 % =====================================================================
-% paper-theater :: preamble.tex  (v1.0)
+% paper-theater :: preamble.tex  (v1.1)
 % Shared preamble for script / stage / restage artifacts. Copied verbatim
 % into the artifact directory at the start of a run; skills READ it and
 % never rewrite it (conventions live in format/format.md).
 % Lineage: forge preamble v0.4, minus the collectible-card cover and the
 % rarity machinery, plus \Next glue, the compact \stagehead / \scripthead
-% headers, and the script-mode disc keys [s|o].
+% / \scriptheadown headers, and the script-mode disc keys [s|o].
+% v1.1: added \scriptheadown (own-draft script header, v/p/h/c legend) —
+% discovered missing during the first dogfood run.
 % pdflatex-safe. xcolor arrives via tcolorbox[most].
 % =====================================================================
 
@@ -147,7 +149,7 @@
 {\footnotesize\color{gray!75}%
   \textbf{\textnumero\,\protonum}\;\textperiodcentered\;\protofield
   \;\textperiodcentered\;\protodate
-  \hfill \textsc{paper-theater \textperiodcentered\ stage \textperiodcentered\ v1.0}}\par
+  \hfill \textsc{paper-theater \textperiodcentered\ stage \textperiodcentered\ v1.1}}\par
 \vspace{4pt}{\color{gray!40}\rule{\linewidth}{0.4pt}}\par\vspace{8pt}
 {\LARGE\bfseries \prototitle\par}\vspace{2pt}
 {\itshape\color{gray!75}\protosubtitle\par}\vspace{8pt}
@@ -165,14 +167,15 @@
 \vspace{4pt}{\color{gray!40}\rule{\linewidth}{0.4pt}}\par
 \endgroup\bigskip}
 
-% \scripthead — for script. Reads: \prototitle (paper title), \protosubtitle
-% (authors \textperiodcentered\ venue \textperiodcentered\ year), \protodate.
+% \scripthead — for script on EXTERNAL papers. Reads: \prototitle (paper
+% title), \protosubtitle (authors \textperiodcentered\ venue
+% \textperiodcentered\ year), \protodate. s/o markers only.
 \newcommand{\scripthead}{%
 \begingroup
 \setlength{\parindent}{0pt}%
 {\footnotesize\color{gray!75}%
   scripted \protodate
-  \hfill \textsc{paper-theater \textperiodcentered\ script \textperiodcentered\ v1.0}}\par
+  \hfill \textsc{paper-theater \textperiodcentered\ script \textperiodcentered\ v1.1}}\par
 \vspace{4pt}{\color{gray!40}\rule{\linewidth}{0.4pt}}\par\vspace{8pt}
 {\LARGE\bfseries \prototitle\par}\vspace{2pt}
 {\itshape\color{gray!75}\protosubtitle\par}\vspace{6pt}
@@ -182,10 +185,38 @@
 \vspace{4pt}{\color{gray!40}\rule{\linewidth}{0.4pt}}\par
 \endgroup\bigskip}
 
+% \scriptheadown — for script on the AUTHOR'S OWN draft: v/p/h/c discs are
+% OUR verification state (a claimed proof enters at p, never v), with the
+% auto-tally strip. Added in v1.1 after the first own-draft run had to
+% hand-roll this header.
+\newcommand{\scriptheadown}{%
+\begingroup
+\setlength{\parindent}{0pt}%
+{\footnotesize\color{gray!75}%
+  scripted \protodate
+  \hfill \textsc{paper-theater \textperiodcentered\ script \textperiodcentered\ v1.1}}\par
+\vspace{4pt}{\color{gray!40}\rule{\linewidth}{0.4pt}}\par\vspace{8pt}
+{\LARGE\bfseries \prototitle\par}\vspace{2pt}
+{\itshape\color{gray!75}\protosubtitle\par}\vspace{6pt}
+{\footnotesize\textbf{Author's own draft} --- discs are \emph{our} verification
+ state, not the paper's claims.\;
+ \disc{v}~Verified \textperiodcentered\ \disc{p}~Plausible (claimed-proved, not
+ re-verified) \textperiodcentered\ \disc{h}~Heuristic \textperiodcentered\
+ \disc{c}~Conjectured.\\[2pt]
+ \setcounter{proto@scratch}{\protoTotV}\disc{v}\,\arabic{proto@scratch}~Verified
+ \;\textperiodcentered\;
+ \setcounter{proto@scratch}{\protoTotP}\disc{p}\,\arabic{proto@scratch}~Plausible
+ \;\textperiodcentered\;
+ \setcounter{proto@scratch}{\protoTotH}\disc{h}\,\arabic{proto@scratch}~Heuristic
+ \;\textperiodcentered\;
+ \setcounter{proto@scratch}{\protoTotC}\disc{c}\,\arabic{proto@scratch}~Conjectured\par}
+\vspace{4pt}{\color{gray!40}\rule{\linewidth}{0.4pt}}\par
+\endgroup\bigskip}
+
 % =====================================================================
 % Footer stamp — skills \renewcommand{\theaterstamp} with their own act name.
 % =====================================================================
-\newcommand{\theaterstamp}{paper-theater \textperiodcentered\ v1.0}
+\newcommand{\theaterstamp}{paper-theater \textperiodcentered\ v1.1}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}

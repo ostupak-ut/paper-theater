@@ -1,4 +1,4 @@
-# paper-theater :: format.md — the single source of truth (v1.0)
+# paper-theater :: format.md — the single source of truth (v1.1)
 
 Every paper-theater skill (script, rehearse, stage, restage, tryout, canon) READS
 this file and the assets beside it. **No skill may restate, quote, or re-embed
@@ -109,9 +109,12 @@ a `\Next` line is allowed where it genuinely helps the read.
 ## Fidelity rules (script only)
 
 - Every block is a FAITHFUL restatement of what the source paper actually claims — bugs, gaps, and overclaims included. Improving, repairing, or tightening a claim while extracting it is falsification.
-- Every block carries a **source anchor**: the paper's own numbering plus location — e.g. `[Thm 2, eq. (14), p. 9]` — so any line can be audited against the original in seconds.
+- **Hypothesis completeness.** A restated result carries ALL of the source's hypotheses — every assumption reference, every side condition, every "if additionally". Compression may abbreviate a hypothesis ("under A1, A3–A4"), never drop one. A dropped condition is the canonical fidelity failure: the compressed statement claims MORE than the paper proved. (v1.1 rule — the maiden run dropped an "exactly one zero" condition under compression.)
+- Every block carries a **source anchor**: the paper's own numbering plus the finest location the source permits — equation number and page for PDFs (`[Thm 2, eq. (14), p. 9]`); for .tex sources, the result's own number/label plus section is acceptable (the label is greppable), equation numbers still preferred where the block leans on one.
 - Blocks appear in the PAPER'S order (linear, wrapped around its structure). Script never reorders into a "better" logical sequence.
 - A gap or suspected error in the source is FLAGGED in the Open joints list, never silently fixed and never silently smoothed over.
+- **Headers.** External papers → `\scripthead` (s/o legend). The author's own drafts → `\scriptheadown` (v/p/h/c legend + auto-tally; discs are OUR verification state, claimed-proved enters at `p`). Both live in `preamble.tex`; never hand-roll a header.
+- **Length scales with the source.** The 1–3pp guideline fits typical papers (≤10 numbered results). For dense papers, budget ≈1 script page per 8–10 source pages and keep every load-bearing block — NEVER cut blocks to hit a page count; fidelity outranks brevity.
 
 ## Label & ID scheme (what makes restage possible)
 

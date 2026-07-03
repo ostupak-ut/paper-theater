@@ -1,6 +1,6 @@
 ---
 name: script
-version: 1.0.0
+version: 1.1.0
 description: Part of the paper-theater suite. script strips a THEORY PAPER (economics / OR / IS) down to its script — the bare spine of assumptions, definitions, lemmas, propositions and theorems, in the paper's own order, each block a FAITHFUL restatement with a source anchor [Thm 2, eq. (14), p. 9] and one line of role glue — compiled to a 1–3pp LaTeX→PDF in scripts/<slug>/. Works on OTHER PEOPLE'S papers (reading instrument; blocks marked Stated/Outside, and the run ends with the canon gate — "Canon-worthy?") and on the author's OWN drafts (pen-testing backbone; confidence discs allowed, no canon gate). TRIGGER when the user wants to strip / x-ray / skeleton-ize / spine-out / "get the bare bones of" an EXISTING paper or draft, wants a fast structural read of a paper, or wants to compare two drafts structurally. SKIP for building a prototype of a NEW idea (that is stage); SKIP for studying a paper's math tools (that is rehearse); SKIP for verifying results (tryout) and for prose work; SKIP anything about shell/Python/film scripts or screenwriting — this skill only ever fires on academic theory papers.
 ---
 
@@ -40,10 +40,15 @@ paper's own section) + result environment `[s|o]` (or disc) + `\Anchor{...}` +
 sentence) where it genuinely helps the read.
 
 The fidelity rules in format.md §Fidelity are the heart of this skill:
-faithful restatement (bugs included), source anchor on every block, the
-paper's order, gaps flagged in Open joints — never silently repaired. Notation
-may be lightly normalized ONLY when the paper's own notation is inconsistent,
-and any such change is noted.
+faithful restatement (bugs included), **hypothesis completeness** (every
+assumption reference and side condition survives compression — abbreviate,
+never drop), source anchor on every block at the finest granularity the
+source permits, the paper's order, gaps flagged in Open joints — never
+silently repaired. Notation may be lightly normalized ONLY when the paper's
+own notation is inconsistent, and any such change is noted. After drafting
+all blocks, run a **hypothesis audit pass**: re-open each source result and
+tick off its conditions against the restated block, one by one — this is
+the single highest-yield check in the skill.
 
 What to cut: literature reviews, motivation, robustness prose, empirical
 sections (note their existence in one line), anything not load-bearing. What
@@ -89,6 +94,11 @@ script is the pen-testing backbone; offer to go block-by-block.
 - **Never improve while extracting.** A repaired claim, a tightened bound, a
   smoothed gap — each is a falsification of the source. Flag in Open joints;
   extract what is written.
+- **Never drop a hypothesis while compressing.** A statement missing one of
+  its source's conditions claims more than the paper proved — the worst kind
+  of unfaithful, because it reads as MORE authoritative. Abbreviate
+  ("under A1, A3–A4"), never omit; audit every block's conditions before
+  shipping (format.md §Fidelity).
 - **Never reorder into a "better" sequence.** The paper's order is data.
 - **No block without an anchor.** Unanchored blocks cannot be audited and do
   not ship.
