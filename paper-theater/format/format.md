@@ -1,4 +1,4 @@
-# paper-theater :: format.md — the single source of truth (v1.5)
+# paper-theater :: format.md — the single source of truth (v1.6)
 
 Every paper-theater skill (script, rehearse, stage, restage, tryout, canon, blocking) READS
 this file and the assets beside it. **No skill may restate, quote, or re-embed
@@ -37,8 +37,9 @@ skills never touch `proto/`, and forge/temper never touch `staging/`.
     refs.bib                   only sources actually leaned on (no source in hand → no \cite)
   scripts/<slug>/              owned by script: script-<slug>.tex → .pdf (+ preamble copy)
   rehearsal/                   owned by rehearse: rehearse-<slug>.tex → .pdf (+ rehearsal-preamble copy)
-  blocking/                    owned by blocking: graph.json (the extracted graph — the record of a run)
-    blocking-<slug>.html       the self-contained interactive explorer (template + injected graph.json)
+  blocking/                    owned by blocking; PER-SLUG files — a project may hold many maps
+    graph-<slug>.json          the extracted graph (the record of a run); never a shared graph.json
+    blocking-<slug>.html       the self-contained interactive explorer (template + injected graph)
   inputs/                      read-only ore (drafts, notes); inputs/literature/ = leaned-on sources
 
 ~/.claude/paper-theater/       the global home (cross-project)
@@ -270,9 +271,11 @@ KaTeX, embedded from `assets/vendor/katex-inline.html` (fonts inlined as data
 URIs; rebuild only to upgrade, via `assets/build_vendor.py`).
 
 **The artifact.** Template at `~/.claude/skills/blocking/assets/explorer.html`;
-a run replaces the payload of `<script id="graph-data"
-type="application/json">` and the `<!--KATEX-->` marker with the vendor
-fragment. Fully self-contained and CSP-safe: inline CSS/JS/fonts, no CDN or
+a run makes THREE substitutions: the payload of `<script id="graph-data"
+type="application/json">` becomes the graph, the `<!--KATEX-->` marker becomes
+the vendor fragment, and the `{{LIBHREF}}` marker becomes the absolute
+`file://` URL of the library page (powers each map's ⌂ library button; on a
+foreign machine the link is simply dead). Fully self-contained and CSP-safe: inline CSS/JS/fonts, no CDN or
 fetch; light/dark theme-aware. Layout: columns follow `meta.sections` (the
 paper's own order), edges flow left→right, the `spine` chain is drawn bold.
 Built-ins that ship with every map: pan/zoom canvas with ⟲ reset (also
@@ -297,8 +300,8 @@ running blocking, remove/rename through the chat (file + row + regenerate,
 always together, so the shelf never lies).
 
 **Registry.** blocking does not write to the stagings registry (that registry
-is stagings-only); `blocking/index.md` and `blocking/graph.json` are the
-durable records of a run.
+is stagings-only); `blocking/index.md` and the per-slug `graph-<slug>.json`
+are the durable records of a run.
 
 ## Compile discipline
 

@@ -827,6 +827,9 @@ function buildControls(){
   tb("save",()=>saveSnapshot());
   tb("json",()=>download(`${G.meta.slug||"model"}-graph.json`,JSON.stringify(G,null,2),"application/json"));
   tb("print",()=>window.print());
+  const LIB="{{LIBHREF}}"; // injected at emission; dead marker -> no button
+  if(!LIB.includes("{{")){const a=document.createElement("a");a.className="tb";
+    a.textContent="⌂ library";a.href=LIB;controls.appendChild(a);}
   tb("◐",()=>{const r=document.documentElement;
     r.dataset.theme=(r.dataset.theme==="dark"||(!r.dataset.theme&&matchMedia("(prefers-color-scheme: dark)").matches))?"light":"dark";});
 }

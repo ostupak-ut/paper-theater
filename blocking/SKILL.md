@@ -1,6 +1,6 @@
 ---
 name: blocking
-version: 1.3.0
+version: 1.3.1
 description: Part of the paper-theater suite. blocking turns a theory MODEL (economics / OR / IS) — the author's own .tex, a paper being read, or an existing staging/ / scripts/<slug>/ / proto/ skeleton — into an INTERACTIVE dependency graph of its MOVING PARTS. Nodes are the MACHINERY, not theorem-blocks and not every symbol — structural assumptions, choice variables, derived quantities, objective functions (expandable into their TERMS), results — laid out in the PAPER'S OWN section columns with the load-bearing spine drawn bold, every formula rendered in real KaTeX, constants relegated to a clickable parameters table, discs reused as confidence marks, and PROBLEMS (structural + modeling) pinned to the exact node, edge, or parameter they attack. Output: a self-contained HTML explorer at blocking/blocking-<slug>.html (+ graph.json), then a Claude-side "walk the graph" chat (open <node> / flags / present) that doubles as a presentation scaffold. TRIGGER when the user wants to "map the model", "graph the moving parts", "what depends on what", "pin the criticisms to the parts they hit", an interactive model explorer, or a narrative walk of the mechanism for a talk. SKIP for stripping a paper to a linear spine PDF (script), prototyping a NEW idea (stage), verification (tryout), studying a paper's math tools (rehearse); SKIP stagecraft — actors, cameras, choreography — this skill only ever fires on theory models.
 ---
 
@@ -72,10 +72,12 @@ one-liner, and a note per the schema. Few sharp flags beat many weak ones.
 
 ## Step 3. Emit the map
 
-Write `blocking/graph.json`. Emit = template with TWO substitutions: the
+Write `blocking/graph-<slug>.json` (per-slug, NEVER a shared graph.json — a
+project may hold many maps). Emit = template with THREE substitutions: the
 payload of `<script id="graph-data" type="application/json">` becomes the
-graph, and the `<!--KATEX-->` marker becomes the vendor fragment
-`assets/vendor/katex-inline.html` (self-contained math; never link a CDN);
+graph, the `<!--KATEX-->` marker becomes the vendor fragment
+`assets/vendor/katex-inline.html` (self-contained math; never link a CDN),
+and `{{LIBHREF}}` becomes the absolute file:// URL of the library page;
 write `blocking/blocking-<slug>.html`. Verify before shipping: JSON parses;
 every edge endpoint, flag target (node, edge, or `param:`), `sec`, param id,
 and sub-term parent resolves; the collapsed graph is a DAG. Then OPEN the map
