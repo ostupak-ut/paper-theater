@@ -9,9 +9,10 @@ economics, operations research, and information systems: small, complete,
 honest stagings of the logic, before you write the paper.
 
 > *script the paper, rehearse its moves, stage your own, tryout before
-> opening night — the survivors join the canon.*
+> opening night — the survivors join the canon, and blocking maps where
+> every part stands.*
 
-## The six acts
+## The seven acts
 
 | skill | what it does |
 |---|---|
@@ -21,6 +22,7 @@ honest stagings of the logic, before you write the paper.
 | **restage** | rebuilds a staging after the math changes, with honest cache invalidation: unchanged blocks keep their earned discs, changed blocks reset. A green disc never survives a change to the math it verified. |
 | **tryout** | the out-of-town tryout, three passes per result: **analytical** (complete the symbolic derivation in sympy), **numeric** (seeded harness — limiting cases, random instances, counterexample hunt), **blind skeptic** (the statement, *proof withheld*, handed to a fresh adversarial agent told to break it). Discs move to what the evidence earns. It never edits the math. |
 | **canon** | your exemplar library — papers whose *structure* you would imitate, each stored as spine + shelf tags + a 1–2 line lesson ("the move worth stealing"). Human-gated, shelf-disciplined, and the thing that makes stage sound like you rather than like a language model. |
+| **blocking** | the suite's one interactive artifact — theatrical blocking, the diagram of where everyone stands. A model's moving parts (assumptions, controls, mechanisms, objective terms, theorems) become a clickable dependency map in the paper's own section columns: spine drawn bold, every formula in real KaTeX (embedded — one fully offline file), problems pinned to the exact node, edge, or parameter they attack, symbols and terms that define themselves on hover, a presentation mode that opens on the game form, and a searchable library of every map built. Claude then walks the graph with you in chat. |
 
 ## The confidence discs
 
@@ -51,13 +53,16 @@ nobody — human or model — hand-edits one.
 
 ```bash
 git clone https://github.com/ostupak-ut/paper-theater
-cp -R paper-theater/{script,rehearse,stage,restage,tryout,canon,paper-theater} ~/.claude/skills/
+cp -R paper-theater/{script,rehearse,stage,restage,tryout,canon,blocking,paper-theater} ~/.claude/skills/
 ```
 
 Requires: Claude Code, LaTeX (`latexmk`, `libertine`, `newtxmath`,
 `tcolorbox`, `totcount`), Python (`sympy`, `numpy`; `scipy` optional).
+blocking's KaTeX is vendored in `blocking/assets/vendor/` — no runtime
+dependency; rebuild it only to upgrade (`blocking/assets/build_vendor.py`).
 
-Runtime data lives in `~/.claude/paper-theater/` (stagings registry + canon).
+Runtime data lives in `~/.claude/paper-theater/` (stagings registry + canon +
+the blocking map library).
 
 ## Layout
 
@@ -67,6 +72,8 @@ paper-theater/            shared: format/format.md (the law), preamble.tex,
 script/    rehearse/      SKILL.md each — procedure + constraints only;
 stage/     restage/       no skill embeds a convention
 tryout/    canon/
+blocking/                 SKILL.md + assets/ (explorer + library templates,
+                          vendored KaTeX)
 ```
 
 ## Lineage
